@@ -91,9 +91,11 @@ static NSString * const reuseIdentifier = @"Cell";
     // Load character image
     cell.imageView.image = nil;
     cell.imageURL = aCharacter.imageURLString;
+    [cell.activityIndicator startAnimating];
     [marvel loadImage:indexPath.row withCompletionHandler:^(UIImage * _Nullable image) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([cell.imageURL isEqualToString:aCharacter.imageURLString]) {
+            [cell.activityIndicator stopAnimating];
             cell.imageView.image = image;
             }
         });

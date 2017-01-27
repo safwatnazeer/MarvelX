@@ -12,4 +12,7 @@
 @interface DetailCollectionViewController : UICollectionViewController
 @property (nonatomic,nullable) MarvelRepo *marvel;
 @property (nonatomic,nonnull) NSIndexPath *itemIndex;
+@property (nonatomic,nullable) UIActivityIndicatorView *activityIndicator;
+
+
 @end

@@ -37,11 +37,14 @@
             NSString *path =[aResult valueForKeyPath:@"thumbnail.path"];
             NSString *name =[aResult valueForKeyPath:@"name"];
             NSString *characterId =[aResult valueForKeyPath:@"id"];
+            
+            
+            
             NSString *imageURLString =[[NSString alloc] initWithFormat:@"%@/portrait_uncanny.jpg",path];
             MarvelCharacter *marvelCharacter = [[MarvelCharacter alloc] init:name andURL:imageURLString andId:characterId];
-            NSLog(@"Image path: %@",path);
+            //NSLog(@"Image path: %@",path);
             // check if image available then add it to charahters else ignor it
-            if (![path containsString:@"image_not_available"]) {
+            if (![path containsString:@"image_not_available"] ) {
             [self.charactersArray addObject:marvelCharacter];
             //NSLog(@"\narray count = %lu",self.charactersArray.count);
             }
@@ -78,9 +81,11 @@
 }
 
 -(void) loadComics:(NSInteger)itemIndex withCompletionHandler:(void (^) (void)) completionHandler withOffset:(NSInteger)offset{
-    //1009368
+    
     MarvelCharacter *aCharacter = self.charactersArray[itemIndex];
-    NSString * targetURLString = [[NSString alloc]initWithFormat:@"https://gateway.marvel.com:443/v1/public/characters/%@/comics?formatType=comic&orderBy=-onsaleDate&modifiedSince=2013-01-01&",aCharacter.characterId];
+   // NSString * targetURLString = [[NSString alloc]initWithFormat:@"https://gateway.marvel.com:443/v1/public/characters/%@/comics?formatType=comic&orderBy=-onsaleDate&modifiedSince=2013-01-01&",aCharacter.characterId];
+    NSString * targetURLString = [[NSString alloc]initWithFormat:@"https://gateway.marvel.com:443/v1/public/characters/%@/comics?formatType=comic&orderBy=-onsaleDate&",aCharacter.characterId];
+    
     [self.apiClient downloadJson:targetURLString withCompletionHandler:^(NSDictionary * _Nullable dict){
         
         NSArray *results = [dict valueForKeyPath:@"data.results"];

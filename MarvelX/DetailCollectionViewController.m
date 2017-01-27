@@ -14,7 +14,7 @@
 @end
 
 @implementation DetailCollectionViewController
-@synthesize marvel,itemIndex;
+@synthesize marvel,itemIndex,activityIndicator;
 static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
@@ -27,11 +27,15 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
     // load data
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.collectionView.backgroundView = activityIndicator;
+    [activityIndicator startAnimating];
     [marvel.comicsArray removeAllObjects];
     
     [marvel loadComics:self.itemIndex.row withCompletionHandler:^{
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"comics count = %lu , itemIndex = %lu",marvel.comicsArray.count, itemIndex.row);
+            [activityIndicator stopAnimating];
             [self.collectionView reloadData];
         });
     }
@@ -71,9 +75,9 @@ static NSString * const reuseIdentifier = @"Cell";
     DetailCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     
     MarvelComic *comic = marvel.comicsArray[indexPath.row];
-    NSLog(@"title:%@,desc:%@,imageURL:%@", comic.title,comic.description,comic.imageURLString);
-    if (comic.title !=nil) cell.title.text = comic.title;
-        else cell.title.text =@"No Title ..";
+   // NSLog(@"title:%@,desc:%@,imageURL:%@", comic.title,comic.description,comic.imageURLString);
+    if ([comic.title isEqual: [NSNull null]] ) cell.title.text =@"No Title .." ;
+        else cell.title.text = comic.title;
     if ([comic.description isEqual: [NSNull null]])
         cell.description.text =@"No Details ..";
        else cell.description.text = comic.description;
@@ -81,11 +85,12 @@ static NSString * const reuseIdentifier = @"Cell";
     //loadImage
     cell.imageView.image = nil;
     
-    if (comic.imageURLString!=nil)
+    if (![comic.imageURLString isEqual:[NSNull null]])
     {
     cell.imageURL = comic.imageURLString;
     [marvel loadComicImage:indexPath.row withCompletionHandler:^(UIImage * _Nullable image) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"Image loaded ..");
             if ([cell.imageURL isEqualToString:comic.imageURLString]) {
                 cell.imageView.image = image;
             }
