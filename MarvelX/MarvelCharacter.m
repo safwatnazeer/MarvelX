@@ -11,11 +11,12 @@
 @implementation MarvelCharacter
 @synthesize image,imageURLString,name;
 
--(id) init:(NSString *)charName andURL:(NSString *)imageURL {
+-(id) init:(NSString *)charName andURL:(NSString *)imageURL  andId:(NSString *)charId{
     
     if (self = [super init]) {
         self.name = charName;
         self.imageURLString = imageURL;
+        self.characterId = charId;
         
     }
     return self;

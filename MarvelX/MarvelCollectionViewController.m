@@ -8,6 +8,7 @@
 
 #import "MarvelCollectionViewController.h"
 #import "MarvelCollectionViewCell.h"
+#import "DetailCollectionViewController.h"
 
 @interface MarvelCollectionViewController ()
 
@@ -44,11 +45,11 @@ static NSString * const reuseIdentifier = @"Cell";
         [marvel loadCharachters:^ {
             NSLog(@"characters count= %lu",marvel.charactersArray.count);
             self.stillLoading = NO;
-            self.currentOffset += 50;
+            self.currentOffset += 20;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.collectionView reloadData];
             });
-        } withOffset:currentOffset+50 ];
+        } withOffset:currentOffset+20 ];
     }
 }
 
@@ -101,9 +102,20 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    [self performSegueWithIdentifier:@"showDetail" sender:self];
+}
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"showDetail"]){
+        NSIndexPath *selectedPath = [self.collectionView indexPathsForSelectedItems][0];
+        DetailCollectionViewController *detailView = segue.destinationViewController;
+        detailView.marvel = self.marvel;
+        detailView.itemIndex = selectedPath;
+        
 
-
-
+    }
+    
+}
 
 @end

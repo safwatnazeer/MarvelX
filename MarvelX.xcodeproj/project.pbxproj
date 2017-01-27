@@ -13,6 +13,9 @@
 		303425581E34DE53000BCC69 /* ApiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 303425571E34DE53000BCC69 /* ApiClient.m */; };
 		303425601E354398000BCC69 /* MarvelRepo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3034255F1E354398000BCC69 /* MarvelRepo.m */; };
 		303425631E354E1C000BCC69 /* MarvelCharacter.m in Sources */ = {isa = PBXBuildFile; fileRef = 303425621E354E1C000BCC69 /* MarvelCharacter.m */; };
+		3034256A1E3AB321000BCC69 /* DetailCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 303425691E3AB321000BCC69 /* DetailCollectionViewController.m */; };
+		3034256F1E3ABB83000BCC69 /* MarvelComic.m in Sources */ = {isa = PBXBuildFile; fileRef = 3034256E1E3ABB83000BCC69 /* MarvelComic.m */; };
+		303425721E3ABF28000BCC69 /* DetailCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 303425711E3ABF28000BCC69 /* DetailCollectionViewCell.m */; };
 		303FDAA31D74257F00BF849B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 303FDAA21D74257F00BF849B /* main.m */; };
 		303FDAA61D74257F00BF849B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 303FDAA51D74257F00BF849B /* AppDelegate.m */; };
 		303FDAAC1D74257F00BF849B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 303FDAAA1D74257F00BF849B /* Main.storyboard */; };
@@ -33,6 +36,12 @@
 		3034255F1E354398000BCC69 /* MarvelRepo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarvelRepo.m; sourceTree = "<group>"; };
 		303425611E354E1C000BCC69 /* MarvelCharacter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarvelCharacter.h; sourceTree = "<group>"; };
 		303425621E354E1C000BCC69 /* MarvelCharacter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarvelCharacter.m; sourceTree = "<group>"; };
+		303425681E3AB321000BCC69 /* DetailCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailCollectionViewController.h; sourceTree = "<group>"; };
+		303425691E3AB321000BCC69 /* DetailCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailCollectionViewController.m; sourceTree = "<group>"; };
+		3034256D1E3ABB83000BCC69 /* MarvelComic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarvelComic.h; sourceTree = "<group>"; };
+		3034256E1E3ABB83000BCC69 /* MarvelComic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarvelComic.m; sourceTree = "<group>"; };
+		303425701E3ABF28000BCC69 /* DetailCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailCollectionViewCell.h; sourceTree = "<group>"; };
+		303425711E3ABF28000BCC69 /* DetailCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailCollectionViewCell.m; sourceTree = "<group>"; };
 		303FDA9E1D74257F00BF849B /* MarvelX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		303FDAA21D74257F00BF849B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		303FDAA41D74257F00BF849B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -57,16 +66,49 @@
 		303425591E34DE5E000BCC69 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3034256C1E3ABB46000BCC69 /* API */,
+				3034256B1E3ABB19000BCC69 /* Data Elements */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		303425671E3AB2C0000BCC69 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				303425531E34D755000BCC69 /* MarvelCollectionViewCell.h */,
+				303425541E34D755000BCC69 /* MarvelCollectionViewCell.m */,
+				303425501E33B276000BCC69 /* MarvelCollectionViewController.h */,
+				303425511E33B276000BCC69 /* MarvelCollectionViewController.m */,
+				303425681E3AB321000BCC69 /* DetailCollectionViewController.h */,
+				303425691E3AB321000BCC69 /* DetailCollectionViewController.m */,
+				303425701E3ABF28000BCC69 /* DetailCollectionViewCell.h */,
+				303425711E3ABF28000BCC69 /* DetailCollectionViewCell.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		3034256B1E3ABB19000BCC69 /* Data Elements */ = {
+			isa = PBXGroup;
+			children = (
+				303425611E354E1C000BCC69 /* MarvelCharacter.h */,
+				303425621E354E1C000BCC69 /* MarvelCharacter.m */,
+				3034256D1E3ABB83000BCC69 /* MarvelComic.h */,
+				3034256E1E3ABB83000BCC69 /* MarvelComic.m */,
+			);
+			name = "Data Elements";
+			sourceTree = "<group>";
+		};
+		3034256C1E3ABB46000BCC69 /* API */ = {
+			isa = PBXGroup;
+			children = (
 				3034254D1E301FDF000BCC69 /* NSString+md5.h */,
 				3034254E1E301FDF000BCC69 /* NSString+md5.m */,
 				303425561E34DE53000BCC69 /* ApiClient.h */,
 				303425571E34DE53000BCC69 /* ApiClient.m */,
 				3034255E1E354398000BCC69 /* MarvelRepo.h */,
 				3034255F1E354398000BCC69 /* MarvelRepo.m */,
-				303425611E354E1C000BCC69 /* MarvelCharacter.h */,
-				303425621E354E1C000BCC69 /* MarvelCharacter.m */,
 			);
-			name = Model;
+			name = API;
 			sourceTree = "<group>";
 		};
 		303FDA951D74257E00BF849B = {
@@ -88,13 +130,10 @@
 		303FDAA01D74257F00BF849B /* MarvelX */ = {
 			isa = PBXGroup;
 			children = (
+				303425671E3AB2C0000BCC69 /* ViewControllers */,
 				303425591E34DE5E000BCC69 /* Model */,
 				303FDAA41D74257F00BF849B /* AppDelegate.h */,
 				303FDAA51D74257F00BF849B /* AppDelegate.m */,
-				303425531E34D755000BCC69 /* MarvelCollectionViewCell.h */,
-				303425541E34D755000BCC69 /* MarvelCollectionViewCell.m */,
-				303425501E33B276000BCC69 /* MarvelCollectionViewController.h */,
-				303425511E33B276000BCC69 /* MarvelCollectionViewController.m */,
 				303FDAAA1D74257F00BF849B /* Main.storyboard */,
 				303FDAAD1D74257F00BF849B /* Assets.xcassets */,
 				303FDAAF1D74257F00BF849B /* LaunchScreen.storyboard */,
@@ -190,6 +229,9 @@
 				303425521E33B276000BCC69 /* MarvelCollectionViewController.m in Sources */,
 				303FDAA31D74257F00BF849B /* main.m in Sources */,
 				303425581E34DE53000BCC69 /* ApiClient.m in Sources */,
+				303425721E3ABF28000BCC69 /* DetailCollectionViewCell.m in Sources */,
+				3034256F1E3ABB83000BCC69 /* MarvelComic.m in Sources */,
+				3034256A1E3AB321000BCC69 /* DetailCollectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

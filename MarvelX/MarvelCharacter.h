@@ -11,11 +11,12 @@
 
 @interface MarvelCharacter : NSObject
 
+@property (nonatomic,nonnull) NSString * characterId;
 @property (nonatomic,nonnull) NSString * name;
 @property (nonatomic,nullable) UIImage * image;
 @property (nonatomic,nonnull) NSString * imageURLString;
 
--(_Nullable id) init:(NSString  * _Nonnull )charName andURL:(NSString * _Nonnull)imageURL;
+-(_Nullable id) init:(NSString  * _Nonnull )charName andURL:(NSString * _Nonnull)imageURL andId:(NSString * _Nonnull)charId;
 
 
 @end
