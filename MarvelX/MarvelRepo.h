@@ -19,6 +19,9 @@
 @property (nonnull,nonatomic) ApiClient *apiClient;
 @property (nonnull,nonatomic) NSMutableArray *charactersArray;
 @property (nonnull,nonatomic) NSMutableArray *comicsArray;
+@property (nonnull,nonatomic) NSMutableArray *letterCharactersArray;
+@property (nonnull,nonatomic) NSMutableArray *letterComicsArray;
+
 
 @property (nonatomic,nonnull) NSCache *imageCache;
 //-(void) loadCharachters:(void (^ _Nullable) (NSDictionary* _Nullable)) completionHandler ;
@@ -26,4 +29,8 @@
 -(void) loadImage:(NSInteger)itemIndex withCompletionHandler:(void (^ _Nullable) (UIImage* _Nullable)) completionHandler;
 -(void) loadComics:(NSInteger)characterId withCompletionHandler:(void (^ _Nullable) (void)) completionHandler withOffset:(NSInteger)offset;
 -(void) loadComicImage:(NSInteger)itemIndex withCompletionHandler:(void (^ _Nullable) (UIImage* _Nullable)) completionHandler;
+
+//test
+-(void) loadCharachters:(void (^ _Nullable) (void)) completionHandler withOffset:(NSInteger)offset forLetterIndex:(NSInteger)index;
+-(void) loadImage:(NSInteger)itemIndex withCompletionHandler:(void (^ _Nullable) (UIImage* _Nullable)) completionHandler forLetterIndex:(NSInteger)index;
 @end

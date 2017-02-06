@@ -21,6 +21,8 @@
 		303FDAAC1D74257F00BF849B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 303FDAAA1D74257F00BF849B /* Main.storyboard */; };
 		303FDAAE1D74257F00BF849B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 303FDAAD1D74257F00BF849B /* Assets.xcassets */; };
 		303FDAB11D74257F00BF849B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 303FDAAF1D74257F00BF849B /* LaunchScreen.storyboard */; };
+		304075511E47470F004D6DD9 /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 304075501E47470F004D6DD9 /* MainTableViewController.m */; };
+		304075541E474846004D6DD9 /* MainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 304075531E474846004D6DD9 /* MainTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,10 @@
 		303FDAAD1D74257F00BF849B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		303FDAB01D74257F00BF849B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		303FDAB21D74257F00BF849B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3040754F1E47470F004D6DD9 /* MainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewController.h; sourceTree = "<group>"; };
+		304075501E47470F004D6DD9 /* MainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
+		304075521E474846004D6DD9 /* MainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewCell.h; sourceTree = "<group>"; };
+		304075531E474846004D6DD9 /* MainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +87,10 @@
 				303425511E33B276000BCC69 /* MarvelCollectionViewController.m */,
 				303425681E3AB321000BCC69 /* DetailCollectionViewController.h */,
 				303425691E3AB321000BCC69 /* DetailCollectionViewController.m */,
+				3040754F1E47470F004D6DD9 /* MainTableViewController.h */,
+				304075501E47470F004D6DD9 /* MainTableViewController.m */,
+				304075521E474846004D6DD9 /* MainTableViewCell.h */,
+				304075531E474846004D6DD9 /* MainTableViewCell.m */,
 				303425701E3ABF28000BCC69 /* DetailCollectionViewCell.h */,
 				303425711E3ABF28000BCC69 /* DetailCollectionViewCell.m */,
 			);
@@ -227,8 +237,10 @@
 				303425601E354398000BCC69 /* MarvelRepo.m in Sources */,
 				303425631E354E1C000BCC69 /* MarvelCharacter.m in Sources */,
 				303425521E33B276000BCC69 /* MarvelCollectionViewController.m in Sources */,
+				304075541E474846004D6DD9 /* MainTableViewCell.m in Sources */,
 				303FDAA31D74257F00BF849B /* main.m in Sources */,
 				303425581E34DE53000BCC69 /* ApiClient.m in Sources */,
+				304075511E47470F004D6DD9 /* MainTableViewController.m in Sources */,
 				303425721E3ABF28000BCC69 /* DetailCollectionViewCell.m in Sources */,
 				3034256F1E3ABB83000BCC69 /* MarvelComic.m in Sources */,
 				3034256A1E3AB321000BCC69 /* DetailCollectionViewController.m in Sources */,
