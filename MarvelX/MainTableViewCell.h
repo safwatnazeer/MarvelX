@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MarvelRepo.h"
+#import "MarvelClient.h"
 #import "MainTableViewController.h"
 
 
 @interface MainTableViewCell : UITableViewCell 
 
 @property (weak, nonatomic,nullable) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic,nullable) IBOutlet UILabel *letterLabel;
 
 
 

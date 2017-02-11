@@ -14,7 +14,7 @@
 @end
 
 @implementation DetailCollectionViewController
-@synthesize marvel,itemIndex,activityIndicator;
+@synthesize marvel,itemIndex,activityIndicator,letterIndex;
 static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
@@ -39,7 +39,7 @@ static NSString * const reuseIdentifier = @"Cell";
             [self.collectionView reloadData];
         });
     }
-    withOffset:0];
+    withOffset:0 forLetterIndex:self.letterIndex];
     
 }
 

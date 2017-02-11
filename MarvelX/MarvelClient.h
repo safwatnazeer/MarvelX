@@ -14,20 +14,18 @@
 
 
 
-@interface MarvelRepo : NSObject
+@interface MarvelClient : NSObject
 
 @property (nonnull,nonatomic) ApiClient *apiClient;
 @property (nonnull,nonatomic) NSMutableArray *charactersArray;
 @property (nonnull,nonatomic) NSMutableArray *comicsArray;
 @property (nonnull,nonatomic) NSMutableArray *letterCharactersArray;
-@property (nonnull,nonatomic) NSMutableArray *letterComicsArray;
-
-
+@property (nonnull,nonatomic) NSMutableArray *lettersArray;
 @property (nonatomic,nonnull) NSCache *imageCache;
-//-(void) loadCharachters:(void (^ _Nullable) (NSDictionary* _Nullable)) completionHandler ;
--(void) loadCharachters:(void (^ _Nullable) (void)) completionHandler withOffset:(NSInteger)offset;
--(void) loadImage:(NSInteger)itemIndex withCompletionHandler:(void (^ _Nullable) (UIImage* _Nullable)) completionHandler;
--(void) loadComics:(NSInteger)characterId withCompletionHandler:(void (^ _Nullable) (void)) completionHandler withOffset:(NSInteger)offset;
+
+
+
+-(void) loadComics:(NSInteger)characterId withCompletionHandler:(void (^ _Nullable) (void)) completionHandler withOffset:(NSInteger)offset forLetterIndex:(NSInteger)index;
 -(void) loadComicImage:(NSInteger)itemIndex withCompletionHandler:(void (^ _Nullable) (UIImage* _Nullable)) completionHandler;
 
 //test

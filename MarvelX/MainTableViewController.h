@@ -7,17 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MarvelRepo.h"
-#import "MarvelCollectionViewCell.h"
+#import "MarvelClient.h"
+
 
 @interface MainTableViewController : UITableViewController <UICollectionViewDataSource,UICollectionViewDelegate>
 
 
-@property (nonatomic,nullable) MarvelRepo *marvel;
-@property (nonatomic) BOOL stillLoading;
+@property (nonatomic,nullable) MarvelClient *marvel;
+//@property (nonatomic) BOOL stillLoading;
 @property (nonatomic) NSInteger currentOffset; //support pagination to allow large number of characters
 @property (nonatomic,nonnull) NSIndexPath* collectionViewItemIndex;
 @property (nonatomic) NSInteger collectionViewTag;
 @property (nonatomic,nonnull) NSMutableArray *stillLoadingArray;
--(void) loadNextGroup;
+//-(void) loadNextGroup;
 @end

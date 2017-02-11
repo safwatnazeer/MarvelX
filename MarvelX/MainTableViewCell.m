@@ -7,26 +7,13 @@
 //
 
 #import "MainTableViewCell.h"
-#import "MarvelCollectionViewCell.h"
 #import "DetailCollectionViewController.h"
 
 @implementation MainTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-
-   
-    
- 
-
 }
-
-
-
-
-
-
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

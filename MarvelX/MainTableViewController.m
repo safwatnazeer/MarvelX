@@ -9,6 +9,7 @@
 #import "MainTableViewController.h"
 #import "MainTableViewCell.h"
 #import "DetailCollectionViewController.h"
+#import "MarvelCollectionViewCell.h"
 
 
 @interface MainTableViewController ()
@@ -16,7 +17,7 @@
 @end
 
 @implementation MainTableViewController
-@synthesize marvel,stillLoading,currentOffset,collectionViewItemIndex,collectionViewTag,stillLoadingArray;
+@synthesize marvel,currentOffset,collectionViewItemIndex,collectionViewTag,stillLoadingArray;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -25,17 +26,28 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    stillLoading = NO;
-     marvel = [[MarvelRepo alloc]init];
+    //stillLoading = NO;
+     marvel = [[MarvelClient alloc]init];
+    
+    [self startLoading];
+    [self.tableView reloadData];
+
+}
+
+-(void) startLoading {
     
     // test
-    stillLoadingArray = [[NSMutableArray alloc]init];
-    [stillLoadingArray addObject:[NSNumber numberWithBool:NO]];
-    [stillLoadingArray addObject:[NSNumber numberWithBool:NO]];
     
-    [self loadNextGroup:0];
-    [self loadNextGroup:1];
-
+    stillLoadingArray = [[NSMutableArray alloc]init];
+    for (NSUInteger i=0; i<marvel.lettersArray.count; i++) {
+        [stillLoadingArray addObject:[NSNumber numberWithBool:NO]];
+        [self loadNextGroup:i];
+    }
+    
+    
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,7 +64,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return 2;
+    return stillLoadingArray.count;
 }
 
 -(void) loadNextGroup:(NSInteger)index {
@@ -62,7 +74,7 @@
         [marvel loadCharachters:^ {
             stillLoadingArray[index] = [NSNumber numberWithBool:NO];
             self.currentOffset += 20;
-            NSInteger currentPath = index;
+           // NSInteger currentPath = index;
             dispatch_async(dispatch_get_main_queue(), ^{
                 MainTableViewCell *cell = [self.tableView cellForRowAtIndexPath: [NSIndexPath indexPathForRow:index inSection:0]];
                 [cell.collectionView reloadData];
@@ -91,6 +103,7 @@
     
     
    // [self loadNextGroup:indexPath];
+    cell.letterLabel.text = [marvel.lettersArray objectAtIndex:indexPath.row];
     return cell;
 }
 
@@ -153,7 +166,7 @@
 -(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger diff = ((NSMutableArray *)marvel.letterCharactersArray[collectionView.tag]).count -(indexPath.row+1);
     if (diff < 3) {
-        [self loadNextGroup:collectionView.tag];
+   //     [self loadNextGroup:collectionView.tag];
         NSLog(@"\nloading next group after offset:%lu, tag:%li ",currentOffset, collectionView.tag);
     }
     

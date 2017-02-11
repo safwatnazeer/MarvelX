@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MarvelRepo.h"
+#import "MarvelClient.h"
 
 @interface DetailCollectionViewController : UICollectionViewController
-@property (nonatomic,nullable) MarvelRepo *marvel;
+@property (nonatomic,nullable) MarvelClient *marvel;
 @property (nonatomic,nonnull) NSIndexPath *itemIndex;
+@property (nonatomic) NSInteger letterIndex;
 @property (nonatomic,nullable) UIActivityIndicatorView *activityIndicator;
 
 

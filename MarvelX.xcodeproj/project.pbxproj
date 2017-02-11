@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3014E5971E4F59C100555AFE /* MarvelCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3014E5961E4F59C100555AFE /* MarvelCollectionViewCell.m */; };
 		3034254F1E301FDF000BCC69 /* NSString+md5.m in Sources */ = {isa = PBXBuildFile; fileRef = 3034254E1E301FDF000BCC69 /* NSString+md5.m */; };
-		303425521E33B276000BCC69 /* MarvelCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 303425511E33B276000BCC69 /* MarvelCollectionViewController.m */; };
-		303425551E34D755000BCC69 /* MarvelCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 303425541E34D755000BCC69 /* MarvelCollectionViewCell.m */; };
 		303425581E34DE53000BCC69 /* ApiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 303425571E34DE53000BCC69 /* ApiClient.m */; };
-		303425601E354398000BCC69 /* MarvelRepo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3034255F1E354398000BCC69 /* MarvelRepo.m */; };
+		303425601E354398000BCC69 /* MarvelClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3034255F1E354398000BCC69 /* MarvelClient.m */; };
 		303425631E354E1C000BCC69 /* MarvelCharacter.m in Sources */ = {isa = PBXBuildFile; fileRef = 303425621E354E1C000BCC69 /* MarvelCharacter.m */; };
 		3034256A1E3AB321000BCC69 /* DetailCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 303425691E3AB321000BCC69 /* DetailCollectionViewController.m */; };
 		3034256F1E3ABB83000BCC69 /* MarvelComic.m in Sources */ = {isa = PBXBuildFile; fileRef = 3034256E1E3ABB83000BCC69 /* MarvelComic.m */; };
@@ -26,16 +25,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3014E5951E4F59C100555AFE /* MarvelCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarvelCollectionViewCell.h; sourceTree = "<group>"; };
+		3014E5961E4F59C100555AFE /* MarvelCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarvelCollectionViewCell.m; sourceTree = "<group>"; };
 		3034254D1E301FDF000BCC69 /* NSString+md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+md5.h"; sourceTree = "<group>"; };
 		3034254E1E301FDF000BCC69 /* NSString+md5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+md5.m"; sourceTree = "<group>"; };
-		303425501E33B276000BCC69 /* MarvelCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarvelCollectionViewController.h; sourceTree = "<group>"; };
-		303425511E33B276000BCC69 /* MarvelCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarvelCollectionViewController.m; sourceTree = "<group>"; };
-		303425531E34D755000BCC69 /* MarvelCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarvelCollectionViewCell.h; sourceTree = "<group>"; };
-		303425541E34D755000BCC69 /* MarvelCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarvelCollectionViewCell.m; sourceTree = "<group>"; };
 		303425561E34DE53000BCC69 /* ApiClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiClient.h; sourceTree = "<group>"; };
 		303425571E34DE53000BCC69 /* ApiClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiClient.m; sourceTree = "<group>"; };
-		3034255E1E354398000BCC69 /* MarvelRepo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarvelRepo.h; sourceTree = "<group>"; };
-		3034255F1E354398000BCC69 /* MarvelRepo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarvelRepo.m; sourceTree = "<group>"; };
+		3034255E1E354398000BCC69 /* MarvelClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarvelClient.h; sourceTree = "<group>"; };
+		3034255F1E354398000BCC69 /* MarvelClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarvelClient.m; sourceTree = "<group>"; };
 		303425611E354E1C000BCC69 /* MarvelCharacter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarvelCharacter.h; sourceTree = "<group>"; };
 		303425621E354E1C000BCC69 /* MarvelCharacter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarvelCharacter.m; sourceTree = "<group>"; };
 		303425681E3AB321000BCC69 /* DetailCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailCollectionViewController.h; sourceTree = "<group>"; };
@@ -81,15 +78,13 @@
 		303425671E3AB2C0000BCC69 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				303425531E34D755000BCC69 /* MarvelCollectionViewCell.h */,
-				303425541E34D755000BCC69 /* MarvelCollectionViewCell.m */,
-				303425501E33B276000BCC69 /* MarvelCollectionViewController.h */,
-				303425511E33B276000BCC69 /* MarvelCollectionViewController.m */,
 				303425681E3AB321000BCC69 /* DetailCollectionViewController.h */,
 				303425691E3AB321000BCC69 /* DetailCollectionViewController.m */,
 				3040754F1E47470F004D6DD9 /* MainTableViewController.h */,
 				304075501E47470F004D6DD9 /* MainTableViewController.m */,
 				304075521E474846004D6DD9 /* MainTableViewCell.h */,
+				3014E5951E4F59C100555AFE /* MarvelCollectionViewCell.h */,
+				3014E5961E4F59C100555AFE /* MarvelCollectionViewCell.m */,
 				304075531E474846004D6DD9 /* MainTableViewCell.m */,
 				303425701E3ABF28000BCC69 /* DetailCollectionViewCell.h */,
 				303425711E3ABF28000BCC69 /* DetailCollectionViewCell.m */,
@@ -115,8 +110,8 @@
 				3034254E1E301FDF000BCC69 /* NSString+md5.m */,
 				303425561E34DE53000BCC69 /* ApiClient.h */,
 				303425571E34DE53000BCC69 /* ApiClient.m */,
-				3034255E1E354398000BCC69 /* MarvelRepo.h */,
-				3034255F1E354398000BCC69 /* MarvelRepo.m */,
+				3034255E1E354398000BCC69 /* MarvelClient.h */,
+				3034255F1E354398000BCC69 /* MarvelClient.m */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -233,10 +228,9 @@
 			files = (
 				303FDAA61D74257F00BF849B /* AppDelegate.m in Sources */,
 				3034254F1E301FDF000BCC69 /* NSString+md5.m in Sources */,
-				303425551E34D755000BCC69 /* MarvelCollectionViewCell.m in Sources */,
-				303425601E354398000BCC69 /* MarvelRepo.m in Sources */,
+				303425601E354398000BCC69 /* MarvelClient.m in Sources */,
+				3014E5971E4F59C100555AFE /* MarvelCollectionViewCell.m in Sources */,
 				303425631E354E1C000BCC69 /* MarvelCharacter.m in Sources */,
-				303425521E33B276000BCC69 /* MarvelCollectionViewController.m in Sources */,
 				304075541E474846004D6DD9 /* MainTableViewCell.m in Sources */,
 				303FDAA31D74257F00BF849B /* main.m in Sources */,
 				303425581E34DE53000BCC69 /* ApiClient.m in Sources */,
