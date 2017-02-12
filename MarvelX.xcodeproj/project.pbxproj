@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3014E5971E4F59C100555AFE /* MarvelCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3014E5961E4F59C100555AFE /* MarvelCollectionViewCell.m */; };
+		3014E59E1E5015A900555AFE /* marvel5.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 3014E59D1E5015A900555AFE /* marvel5.jpeg */; };
 		3034254F1E301FDF000BCC69 /* NSString+md5.m in Sources */ = {isa = PBXBuildFile; fileRef = 3034254E1E301FDF000BCC69 /* NSString+md5.m */; };
 		303425581E34DE53000BCC69 /* ApiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 303425571E34DE53000BCC69 /* ApiClient.m */; };
 		303425601E354398000BCC69 /* MarvelClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3034255F1E354398000BCC69 /* MarvelClient.m */; };
@@ -27,6 +28,7 @@
 /* Begin PBXFileReference section */
 		3014E5951E4F59C100555AFE /* MarvelCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarvelCollectionViewCell.h; sourceTree = "<group>"; };
 		3014E5961E4F59C100555AFE /* MarvelCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarvelCollectionViewCell.m; sourceTree = "<group>"; };
+		3014E59D1E5015A900555AFE /* marvel5.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = marvel5.jpeg; sourceTree = "<group>"; };
 		3034254D1E301FDF000BCC69 /* NSString+md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+md5.h"; sourceTree = "<group>"; };
 		3034254E1E301FDF000BCC69 /* NSString+md5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+md5.m"; sourceTree = "<group>"; };
 		303425561E34DE53000BCC69 /* ApiClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiClient.h; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				303FDAA41D74257F00BF849B /* AppDelegate.h */,
 				303FDAA51D74257F00BF849B /* AppDelegate.m */,
 				303FDAAA1D74257F00BF849B /* Main.storyboard */,
+				3014E59D1E5015A900555AFE /* marvel5.jpeg */,
 				303FDAAD1D74257F00BF849B /* Assets.xcassets */,
 				303FDAAF1D74257F00BF849B /* LaunchScreen.storyboard */,
 				303FDAB21D74257F00BF849B /* Info.plist */,
@@ -203,6 +206,7 @@
 				TargetAttributes = {
 					303FDA9D1D74257E00BF849B = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = B95A6DKU56;
 					};
 				};
 			};
@@ -229,6 +233,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3014E59E1E5015A900555AFE /* marvel5.jpeg in Resources */,
 				303FDAB11D74257F00BF849B /* LaunchScreen.storyboard in Resources */,
 				303FDAAE1D74257F00BF849B /* Assets.xcassets in Resources */,
 				303FDAAC1D74257F00BF849B /* Main.storyboard in Resources */,
@@ -369,6 +374,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = B95A6DKU56;
 				INFOPLIST_FILE = MarvelX/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.safwat.TestObjC;
@@ -380,6 +386,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = B95A6DKU56;
 				INFOPLIST_FILE = MarvelX/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.safwat.TestObjC;

@@ -25,6 +25,10 @@ static NSString * const reuseIdentifier = @"Cell";
     
     // Register cell classes
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    // set character namw
+    NSMutableArray *arr = marvel.letterCharactersArray[letterIndex];
+    MarvelCharacter *marvelCharacter = arr[itemIndex.row];
+    self.navigationItem.title = marvelCharacter.name;
     
     // load data
     activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -106,6 +110,12 @@ static NSString * const reuseIdentifier = @"Cell";
 {
     return CGSizeMake(self.view.frame.size.width-40, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height);
 }
+
+-(UIStatusBarStyle) preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
+
 
 
 @end

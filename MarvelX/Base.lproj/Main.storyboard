@@ -52,13 +52,13 @@
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pJn-QW-YNz">
-                                                                <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="120" height="119"/>
                                                             </imageView>
                                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="NmV-sJ-2eb">
                                                                 <rect key="frame" x="50" y="50" width="20" height="20"/>
                                                             </activityIndicatorView>
                                                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ueF-lX-ulf">
-                                                                <rect key="frame" x="0.0" y="100" width="120" height="20"/>
+                                                                <rect key="frame" x="0.0" y="99" width="120" height="20"/>
                                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="3Rl-c8-K0k">
                                                                     <rect key="frame" x="0.0" y="0.0" width="120" height="20"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -132,7 +132,10 @@
                             <outlet property="delegate" destination="h5b-a9-TfB" id="nRX-2t-sWL"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Marvel Xplore" id="YlC-PP-zNx"/>
+                    <navigationItem key="navigationItem" title="Marvel Xplore" id="YlC-PP-zNx">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="Vc8-gW-oCy"/>
+                    </navigationItem>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JdB-uB-Dvi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -160,14 +163,17 @@
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="420"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Tw-hK-diJ">
-                                            <rect key="frame" x="13" y="18" width="274" height="18"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Tw-hK-diJ">
+                                            <rect key="frame" x="13" y="18" width="274" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="y7n-5c-fMG"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lkw-4S-6Jl">
-                                            <rect key="frame" x="40" y="46" width="220" height="240"/>
+                                            <rect key="frame" x="40" y="68" width="220" height="240"/>
                                             <gestureRecognizers/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="220" id="1O6-li-HjX"/>
@@ -175,7 +181,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vld-0Z-K0X">
-                                            <rect key="frame" x="13" y="296" width="274" height="140"/>
+                                            <rect key="frame" x="13" y="318" width="274" height="140"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="140" id="WBk-8N-3c3"/>
                                             </constraints>
@@ -219,7 +225,8 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gQE-O8-5X7" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kag-6z-Ynq">
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kag-6z-Ynq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="0.79056078767123283" colorSpace="calibratedRGB"/>

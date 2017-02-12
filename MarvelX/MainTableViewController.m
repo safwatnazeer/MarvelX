@@ -25,13 +25,7 @@
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    //stillLoading = NO;
-     marvel = [[MarvelClient alloc]init];
+    marvel = [[MarvelClient alloc]init];
     
     [self startLoading];
     [self.tableView reloadData];
@@ -40,12 +34,12 @@
 
 -(void) startLoading {
     
-    // test
+    
     
     stillLoadingArray = [[NSMutableArray alloc]init];
     for (NSUInteger i=0; i<marvel.lettersArray.count; i++) {
         [stillLoadingArray addObject:[NSNumber numberWithBool:NO]];
-        [self loadNextGroup:i];
+      //  [self loadNextGroup:i];
     }
     
     
@@ -77,13 +71,13 @@
         stillLoadingArray[index] = [NSNumber numberWithBool:YES];
         [marvel loadCharachters:^ {
             stillLoadingArray[index] = [NSNumber numberWithBool:NO];
-            self.currentOffset += 20;
+           // self.currentOffset += 20;
            // NSInteger currentPath = index;
             dispatch_async(dispatch_get_main_queue(), ^{
                 MainTableViewCell *cell = [self.tableView cellForRowAtIndexPath: [NSIndexPath indexPathForRow:index inSection:0]];
                 [cell.collectionView reloadData];
             });
-        } withOffset:currentOffset+20 forLetterIndex:index];
+        } withOffset:currentOffset forLetterIndex:index];
     }
 }
 
@@ -94,9 +88,9 @@
     MainTableViewCell *mycell = (MainTableViewCell *) cell;
     mycell.collectionView.delegate = self;
     mycell.collectionView.dataSource = self;
-    NSLog(@"before cell collectionview tag = %li", mycell.collectionView.tag);
+    //NSLog(@"before cell collectionview tag = %li", mycell.collectionView.tag);
     mycell.collectionView.tag = indexPath.row;
-    NSLog(@"will display cell called for index: %li",indexPath.row);
+    //NSLog(@"will display cell called for index: %li",indexPath.row);
     //[self loadNextGroup:indexPath.row];
     [mycell.collectionView reloadData];
     
@@ -105,8 +99,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tablecell" forIndexPath:indexPath];
     
-    
-   // [self loadNextGroup:indexPath];
+    // load only in case of no characters were loded before
+    NSMutableArray *arr = marvel.letterCharactersArray[indexPath.row];
+    if (arr.count == 0) {
+        [self loadNextGroup:indexPath.row];
+    }
     cell.letterLabel.text = [marvel.lettersArray objectAtIndex:indexPath.row];
     return cell;
 }
@@ -122,7 +119,9 @@
     
 }
 
-
+-(UIStatusBarStyle) preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
 
 // MARK: --------------------- collection view
 
@@ -132,7 +131,7 @@
     cell.backgroundColor = [UIColor blackColor];
     MarvelCharacter *aCharacter = marvel.letterCharactersArray[collectionView.tag][indexPath.row];
     cell.name.text =aCharacter.name;
-    NSLog(@"IndexPath.row = %li",(long)indexPath.row);
+    //NSLog(@"IndexPath.row = %li",(long)indexPath.row);
     // Load character image
     cell.imageView.image = nil;
     cell.imageURL = aCharacter.imageURLString;
