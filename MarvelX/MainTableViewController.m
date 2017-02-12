@@ -18,8 +18,12 @@
 
 @implementation MainTableViewController
 @synthesize marvel,currentOffset,collectionViewItemIndex,collectionViewTag,stillLoadingArray;
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -55,7 +59,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
+// MARK:--------------------------- Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
@@ -90,11 +94,11 @@
     MainTableViewCell *mycell = (MainTableViewCell *) cell;
     mycell.collectionView.delegate = self;
     mycell.collectionView.dataSource = self;
+    NSLog(@"before cell collectionview tag = %li", mycell.collectionView.tag);
     mycell.collectionView.tag = indexPath.row;
-    
     NSLog(@"will display cell called for index: %li",indexPath.row);
     //[self loadNextGroup:indexPath.row];
-    //[mycell.collectionView reloadData];
+    [mycell.collectionView reloadData];
     
 }
 
@@ -114,17 +118,18 @@
     DetailCollectionViewController *detailView = segue.destinationViewController;
     detailView.marvel = self.marvel;
     detailView.itemIndex = collectionViewItemIndex;
+    detailView.letterIndex = collectionViewTag;
     
 }
 
 
 
-// MARK: collection view
+// MARK: --------------------- collection view
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MarvelCollectionViewCell *cell =(MarvelCollectionViewCell *) [collectionView dequeueReusableCellWithReuseIdentifier:@"collectioncell" forIndexPath:indexPath];
     
-    cell.backgroundColor = [UIColor blueColor];
+    cell.backgroundColor = [UIColor blackColor];
     MarvelCharacter *aCharacter = marvel.letterCharactersArray[collectionView.tag][indexPath.row];
     cell.name.text =aCharacter.name;
     NSLog(@"IndexPath.row = %li",(long)indexPath.row);
@@ -165,7 +170,7 @@
 
 -(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger diff = ((NSMutableArray *)marvel.letterCharactersArray[collectionView.tag]).count -(indexPath.row+1);
-    if (diff < 3) {
+    if (diff < 1) {
    //     [self loadNextGroup:collectionView.tag];
         NSLog(@"\nloading next group after offset:%lu, tag:%li ",currentOffset, collectionView.tag);
     }

@@ -34,7 +34,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
     [marvel loadComics:self.itemIndex.row withCompletionHandler:^{
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"comics count = %lu , itemIndex = %lu",marvel.comicsArray.count, itemIndex.row);
+            NSLog(@"comics count = %lu , itemIndex = %lu, letter index = %lu",marvel.comicsArray.count, itemIndex.row, letterIndex);
             [activityIndicator stopAnimating];
             [self.collectionView reloadData];
         });
@@ -102,6 +102,10 @@ static NSString * const reuseIdentifier = @"Cell";
     return cell;
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(self.view.frame.size.width-40, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height);
+}
 
 
 @end

@@ -18,7 +18,7 @@
         self.charactersArray = [[NSMutableArray alloc]init];
         self.lettersArray = [[NSMutableArray alloc]init];
         self.letterCharactersArray = [[NSMutableArray alloc]init];
-        
+        self.comicsArray = [[NSMutableArray alloc]init];
         for (NSInteger i=0;i<26;i++ ) {
             NSMutableArray *arr1= [[NSMutableArray alloc]init];
             [self.letterCharactersArray addObject:arr1];
@@ -34,7 +34,7 @@
 -(void) loadCharachters:(void (^) (void)) completionHandler withOffset:(NSInteger)offset forLetterIndex:(NSInteger)index{
     
     //https://gateway.marvel.com:443/v1/public/characters?name=iron%20man&
-    NSString * targetURLString = [[NSString alloc]initWithFormat:@"https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=%@&offset=%lu&limit=20&modifiedSince=2005-01-01&orderBy=name&",self.lettersArray[index],offset ];
+    NSString * targetURLString = [[NSString alloc]initWithFormat:@"https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=%@&offset=%lu&limit=20&modifiedSince=1950-01-01&orderBy=name&",self.lettersArray[index],offset ];
     [self.apiClient downloadJson:targetURLString withCompletionHandler:^(NSDictionary * _Nullable dict) {
         
        
@@ -45,14 +45,14 @@
             NSString *path =[aResult valueForKeyPath:@"thumbnail.path"];
             NSString *name =[aResult valueForKeyPath:@"name"];
             NSString *characterId =[aResult valueForKeyPath:@"id"];
-            
+            NSArray *comics = [aResult valueForKeyPath:@"comics.items"];
             
             
             NSString *imageURLString =[[NSString alloc] initWithFormat:@"%@/portrait_uncanny.jpg",path];
             MarvelCharacter *marvelCharacter = [[MarvelCharacter alloc] init:name andURL:imageURLString andId:characterId];
             
             // check if image available then add it to charahters else ignor it
-            if (![path containsString:@"image_not_available"] ) {
+            if ( ![path containsString:@"image_not_available"] && comics.count > 0  ) {
                 [self.letterCharactersArray[index] addObject:marvelCharacter];
             }
         }

@@ -66,6 +66,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3014E59B1E4FC73600555AFE /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				303425681E3AB321000BCC69 /* DetailCollectionViewController.h */,
+				303425691E3AB321000BCC69 /* DetailCollectionViewController.m */,
+				303425701E3ABF28000BCC69 /* DetailCollectionViewCell.h */,
+				303425711E3ABF28000BCC69 /* DetailCollectionViewCell.m */,
+			);
+			name = DetailView;
+			sourceTree = "<group>";
+		};
+		3014E59C1E4FC76500555AFE /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				3040754F1E47470F004D6DD9 /* MainTableViewController.h */,
+				304075501E47470F004D6DD9 /* MainTableViewController.m */,
+				304075521E474846004D6DD9 /* MainTableViewCell.h */,
+				304075531E474846004D6DD9 /* MainTableViewCell.m */,
+				3014E5951E4F59C100555AFE /* MarvelCollectionViewCell.h */,
+				3014E5961E4F59C100555AFE /* MarvelCollectionViewCell.m */,
+			);
+			name = MainView;
+			sourceTree = "<group>";
+		};
 		303425591E34DE5E000BCC69 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -78,16 +102,8 @@
 		303425671E3AB2C0000BCC69 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				303425681E3AB321000BCC69 /* DetailCollectionViewController.h */,
-				303425691E3AB321000BCC69 /* DetailCollectionViewController.m */,
-				3040754F1E47470F004D6DD9 /* MainTableViewController.h */,
-				304075501E47470F004D6DD9 /* MainTableViewController.m */,
-				304075521E474846004D6DD9 /* MainTableViewCell.h */,
-				3014E5951E4F59C100555AFE /* MarvelCollectionViewCell.h */,
-				3014E5961E4F59C100555AFE /* MarvelCollectionViewCell.m */,
-				304075531E474846004D6DD9 /* MainTableViewCell.m */,
-				303425701E3ABF28000BCC69 /* DetailCollectionViewCell.h */,
-				303425711E3ABF28000BCC69 /* DetailCollectionViewCell.m */,
+				3014E59C1E4FC76500555AFE /* MainView */,
+				3014E59B1E4FC73600555AFE /* DetailView */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
