@@ -24,6 +24,13 @@ static NSString * const reuseIdentifier = @"Cell";
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
     
+    // gesture
+     self.gestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(gestureAction:)];
+    //self.gestureRecognizer.delaysTouchesBegan = YES;
+    //self.gestureRecognizer.numberOfTapsRequired = 1;
+    self.gestureRecognizer.delegate = self;
+    [self.collectionView addGestureRecognizer:self.gestureRecognizer];
+    
     stillLoadingArray = [[NSMutableArray alloc]init];
     for (NSUInteger i=0; i<200; i++) {
         [stillLoadingArray addObject:[NSNumber numberWithBool:NO]];
@@ -51,6 +58,42 @@ static NSString * const reuseIdentifier = @"Cell";
         });
     }
     withOffset:0 forLetterIndex:self.letterIndex];
+    
+}
+
+
+-(void)gestureAction:(UITapGestureRecognizer *)gesture {
+    
+    CGPoint p = [gesture locationInView:self.collectionView];
+    
+    NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:p];
+    if (indexPath == nil){
+        NSLog(@"couldn't find index path");
+    } else {
+        // get the cell at indexPath (the one you long pressed)
+        DetailCollectionViewCell* cell =(DetailCollectionViewCell *) [self.collectionView cellForItemAtIndexPath:indexPath];
+        CGRect frame = cell.imageView.frame;
+        if (CGRectContainsPoint(frame, p)) {
+            NSLog(@"image tapped at index : %li", indexPath.row);
+            // show enlarged image
+            //UIImage *image = [[UIImage alloc] initWithCGImage:[cell.imageView.image CGImage]];
+            [self showEnlargedImage:cell.imageView.image withFrame:cell.frame];
+            
+        }
+    }
+    NSLog(@"Gesture detected: %li", indexPath.row);
+    
+}
+
+-(void) showEnlargedImage:(UIImage *)image withFrame:(CGRect)frame{
+    if (self.myPopoverController == nil)
+    {
+        ImageViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"imageViewController"];
+        viewController.image = image;
+        [viewController.view setFrame:frame];
+      //  self.modalPresentationStyle = UIModalPresentationPopover;
+        [self presentViewController:viewController animated:NO completion:nil];
+    }
     
 }
 
@@ -104,6 +147,7 @@ static NSString * const reuseIdentifier = @"Cell";
                          NSLog(@"Image loaded ..");
                          if ([detailCell.imageURL isEqualToString:comic.imageURLString]) {
                              detailCell.imageView.image = image;
+                           //  [detailCell.imageView addGestureRecognizer:self.gestureRecognizer];
                          }
                      });
                  }];
@@ -169,6 +213,7 @@ static NSString * const reuseIdentifier = @"Cell";
         mycell.relatedCollectionView.dataSource = self;
         //NSLog(@"before cell collectionview tag = %li", mycell.collectionView.tag);
         mycell.relatedCollectionView.tag = indexPath.row;
+       // [mycell.imageView addGestureRecognizer:self.gestureRecognizer];
         //NSLog(@"will display cell called for index: %li",indexPath.row);
         //[self loadNextGroup:indexPath.row];
         //[mycell.relatedCollectionView reloadData];

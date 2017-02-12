@@ -10,6 +10,7 @@
 		3014E5971E4F59C100555AFE /* MarvelCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3014E5961E4F59C100555AFE /* MarvelCollectionViewCell.m */; };
 		3014E59E1E5015A900555AFE /* marvel5.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 3014E59D1E5015A900555AFE /* marvel5.jpeg */; };
 		3014E5A11E5031A500555AFE /* RelatedCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3014E5A01E5031A500555AFE /* RelatedCollectionViewCell.m */; };
+		3014E5A41E51096400555AFE /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3014E5A31E51096400555AFE /* ImageViewController.m */; };
 		3034254F1E301FDF000BCC69 /* NSString+md5.m in Sources */ = {isa = PBXBuildFile; fileRef = 3034254E1E301FDF000BCC69 /* NSString+md5.m */; };
 		303425581E34DE53000BCC69 /* ApiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 303425571E34DE53000BCC69 /* ApiClient.m */; };
 		303425601E354398000BCC69 /* MarvelClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3034255F1E354398000BCC69 /* MarvelClient.m */; };
@@ -32,6 +33,8 @@
 		3014E59D1E5015A900555AFE /* marvel5.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = marvel5.jpeg; sourceTree = "<group>"; };
 		3014E59F1E5031A500555AFE /* RelatedCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelatedCollectionViewCell.h; sourceTree = "<group>"; };
 		3014E5A01E5031A500555AFE /* RelatedCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelatedCollectionViewCell.m; sourceTree = "<group>"; };
+		3014E5A21E51096400555AFE /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
+		3014E5A31E51096400555AFE /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
 		3034254D1E301FDF000BCC69 /* NSString+md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+md5.h"; sourceTree = "<group>"; };
 		3034254E1E301FDF000BCC69 /* NSString+md5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+md5.m"; sourceTree = "<group>"; };
 		303425561E34DE53000BCC69 /* ApiClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiClient.h; sourceTree = "<group>"; };
@@ -80,6 +83,8 @@
 				303425711E3ABF28000BCC69 /* DetailCollectionViewCell.m */,
 				3014E59F1E5031A500555AFE /* RelatedCollectionViewCell.h */,
 				3014E5A01E5031A500555AFE /* RelatedCollectionViewCell.m */,
+				3014E5A21E51096400555AFE /* ImageViewController.h */,
+				3014E5A31E51096400555AFE /* ImageViewController.m */,
 			);
 			name = DetailView;
 			sourceTree = "<group>";
@@ -264,6 +269,7 @@
 				304075511E47470F004D6DD9 /* MainTableViewController.m in Sources */,
 				303425721E3ABF28000BCC69 /* DetailCollectionViewCell.m in Sources */,
 				3034256F1E3ABB83000BCC69 /* MarvelComic.m in Sources */,
+				3014E5A41E51096400555AFE /* ImageViewController.m in Sources */,
 				3034256A1E3AB321000BCC69 /* DetailCollectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

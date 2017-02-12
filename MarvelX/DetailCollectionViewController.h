@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "MarvelClient.h"
+#import "ImageViewController.h"
 
-@interface DetailCollectionViewController : UICollectionViewController
+@interface DetailCollectionViewController : UICollectionViewController <UIGestureRecognizerDelegate>
 @property (nonatomic,nullable) MarvelClient *marvel;
 @property (nonatomic,nonnull) NSIndexPath *itemIndex;
 @property (nonatomic) NSInteger letterIndex;
 @property (nonatomic,nullable) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic,nonnull) NSMutableArray *stillLoadingArray;
+@property (nonnull,nonatomic) UITapGestureRecognizer *gestureRecognizer;
+@property (nonnull,nonatomic) ImageViewController  *myPopoverController;
 
 @end
