@@ -110,14 +110,13 @@
     // check if image exists in cache
     UIImage *imageFromCache = [imageCache objectForKey:aCharacter.imageURLString];
     if (imageFromCache) {
-        //NSLog(@"Loaded from cache: >>> %@ for row:%lu ", aCharacter.name ,itemIndex);
+        
         completionHandler(imageFromCache);
     } else
         // load image
     {
         [self.apiClient downloadImage:aCharacter.imageURLString withCompletionHandler:^(UIImage * _Nullable image) {
             [self.imageCache setObject:image forKey:aCharacter.imageURLString];
-            //  NSLog(@"Loaded from Internet VVVV: %@ for row:%lu ", aCharacter.name ,itemIndex);
             completionHandler(image);
             
         }];
@@ -130,20 +129,16 @@
     
     
     NSMutableArray *arr = self.comicsCharacters[index];
-    NSLog(@"Loading image for comics called for comic index %li and inside character index %li, While count ofr comicsChar at index %li",index,itemIndex,arr.count );
     MarvelCharacter *aCharacter = arr[itemIndex];
-    
     // check if image exists in cache
     UIImage *imageFromCache = [imageCache objectForKey:aCharacter.imageURLString];
     if (imageFromCache) {
-        //NSLog(@"Loaded from cache: >>> %@ for row:%lu ", aCharacter.name ,itemIndex);
         completionHandler(imageFromCache);
     } else
-        // load image
+    // load image
     {
         [self.apiClient downloadImage:aCharacter.imageURLString withCompletionHandler:^(UIImage * _Nullable image) {
             [self.imageCache setObject:image forKey:aCharacter.imageURLString];
-            //  NSLog(@"Loaded from Internet VVVV: %@ for row:%lu ", aCharacter.name ,itemIndex);
             completionHandler(image);
             
         }];
@@ -151,9 +146,6 @@
     
     
 }
-
-
-
 -(void) loadComics:(NSInteger)itemIndex withCompletionHandler:(void (^) (void)) completionHandler withOffset:(NSInteger)offset forLetterIndex:(NSInteger)index{
     
     NSMutableArray *arr = self.letterCharactersArray[index];
@@ -182,18 +174,15 @@
 -(void) loadComicImage:(NSInteger)itemIndex withCompletionHandler:(void (^ _Nullable) (UIImage* _Nullable)) completionHandler {
     
     MarvelComic *comic = self.comicsArray[itemIndex];
-    
     // check if image exists in cache
     UIImage *imageFromCache = [imageCache objectForKey:comic.imageURLString];
     if (imageFromCache) {
-      //  NSLog(@"Loaded from cache: >>> %@ for row:%lu ", comic.title ,itemIndex);
         completionHandler(imageFromCache);
     } else
-        // load image
+    // load image
     {
         [self.apiClient downloadImage:comic.imageURLString withCompletionHandler:^(UIImage * _Nullable image) {
             [self.imageCache setObject:image forKey:comic.imageURLString];
-          //  NSLog(@"Loaded from Internet VVVV: %@ for row:%lu ", comic.title ,itemIndex);
             completionHandler(image);
             
         }];

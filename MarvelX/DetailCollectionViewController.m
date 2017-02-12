@@ -21,25 +21,19 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
     // gesture
-     self.gestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(gestureAction:)];
-    //self.gestureRecognizer.delaysTouchesBegan = YES;
-    //self.gestureRecognizer.numberOfTapsRequired = 1;
+    self.gestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(gestureAction:)];
     self.gestureRecognizer.delegate = self;
     [self.collectionView addGestureRecognizer:self.gestureRecognizer];
     
     stillLoadingArray = [[NSMutableArray alloc]init];
     for (NSUInteger i=0; i<200; i++) {
         [stillLoadingArray addObject:[NSNumber numberWithBool:NO]];
-        //  [self loadNextGroup:i];
     }
     
     // Register cell classes
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    // set character namw
+    // set character name
     NSMutableArray *arr = marvel.letterCharactersArray[letterIndex];
     MarvelCharacter *marvelCharacter = arr[itemIndex.row];
     self.navigationItem.title = marvelCharacter.name;
@@ -68,20 +62,16 @@ static NSString * const reuseIdentifier = @"Cell";
     
     NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:p];
     if (indexPath == nil){
-        NSLog(@"couldn't find index path");
     } else {
         // get the cell at indexPath (the one you long pressed)
         DetailCollectionViewCell* cell =(DetailCollectionViewCell *) [self.collectionView cellForItemAtIndexPath:indexPath];
         CGRect frame = cell.imageView.frame;
-        if (CGRectContainsPoint(frame, p)) {
-            NSLog(@"image tapped at index : %li", indexPath.row);
-            // show enlarged image
-            //UIImage *image = [[UIImage alloc] initWithCGImage:[cell.imageView.image CGImage]];
+        CGRect compareFrame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width+indexPath.row*cell.frame.size.width, frame.size.height);
+        
+        if (CGRectContainsPoint(compareFrame, p)) {
             [self showEnlargedImage:cell.imageView.image withFrame:cell.frame];
-            
         }
     }
-    NSLog(@"Gesture detected: %li", indexPath.row);
     
 }
 
@@ -91,8 +81,7 @@ static NSString * const reuseIdentifier = @"Cell";
         ImageViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"imageViewController"];
         viewController.image = image;
         [viewController.view setFrame:frame];
-      //  self.modalPresentationStyle = UIModalPresentationPopover;
-        [self presentViewController:viewController animated:NO completion:nil];
+       [self presentViewController:viewController animated:YES completion:nil];
     }
     
 }
@@ -106,7 +95,6 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-
     return 1;
 }
 
@@ -130,7 +118,6 @@ static NSString * const reuseIdentifier = @"Cell";
     {
         DetailCollectionViewCell *detailCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
         MarvelComic *comic = marvel.comicsArray[indexPath.row];
-       // NSLog(@"title:%@,desc:%@,imageURL:%@", comic.title,comic.description,comic.imageURLString);
         if ([comic.title isEqual: [NSNull null]] ) detailCell.title.text =@"No Title .." ;
             else detailCell.title.text = comic.title;
         if ([comic.description isEqual: [NSNull null]])
@@ -147,7 +134,6 @@ static NSString * const reuseIdentifier = @"Cell";
                          NSLog(@"Image loaded ..");
                          if ([detailCell.imageURL isEqualToString:comic.imageURLString]) {
                              detailCell.imageView.image = image;
-                           //  [detailCell.imageView addGestureRecognizer:self.gestureRecognizer];
                          }
                      });
                  }];
@@ -172,17 +158,17 @@ static NSString * const reuseIdentifier = @"Cell";
             
      }
      else
-         // related collection view cell
+     // related collection view cell
      {
          RelatedCollectionViewCell *relatedCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"relatedCell" forIndexPath:indexPath];
          relatedCell.imageView.image = nil;
-         //cell.backgroundColor = [UIColor blackColor];
+         
          NSMutableArray *arr = marvel.comicsCharacters[collectionView.tag];
+         
          // check if related comic characters already loaded , then load the images
          if (arr.count >0 ) {
              MarvelCharacter *aCharacter = marvel.comicsCharacters[collectionView.tag][indexPath.row];
-             //cell.name.text =aCharacter.name;
-             //NSLog(@"IndexPath.row = %li",(long)indexPath.row);
+             
              // Load character image
              relatedCell.imageView.image = nil;
              relatedCell.imageURL = aCharacter.imageURLString;
@@ -211,18 +197,10 @@ static NSString * const reuseIdentifier = @"Cell";
         DetailCollectionViewCell *mycell = (DetailCollectionViewCell *) cell;
         mycell.relatedCollectionView.delegate = self;
         mycell.relatedCollectionView.dataSource = self;
-        //NSLog(@"before cell collectionview tag = %li", mycell.collectionView.tag);
         mycell.relatedCollectionView.tag = indexPath.row;
-       // [mycell.imageView addGestureRecognizer:self.gestureRecognizer];
-        //NSLog(@"will display cell called for index: %li",indexPath.row);
-        //[self loadNextGroup:indexPath.row];
-        //[mycell.relatedCollectionView reloadData];
+        
     }
 }
-
-
-
-
 
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath

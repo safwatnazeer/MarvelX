@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ImageViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic,nullable) IBOutlet UIImageView *imageView;
 @property (nonatomic,nullable) UIImage* image;
 
 @end

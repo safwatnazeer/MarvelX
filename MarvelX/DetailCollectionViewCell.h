@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface DetailCollectionViewCell : UICollectionViewCell
-@property (weak, nonatomic) IBOutlet UILabel *title;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UILabel *description;
+@property (weak, nonatomic,nullable) IBOutlet UILabel *title;
+@property (weak, nonatomic,nullable) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic,nullable) IBOutlet UILabel *description;
 @property (weak, nonatomic,nullable) IBOutlet UICollectionView *relatedCollectionView;
 
 
-@property (nonatomic) NSString *imageURL;
+@property (nonatomic,nullable) NSString *imageURL;
 @end

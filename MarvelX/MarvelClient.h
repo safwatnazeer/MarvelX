@@ -24,15 +24,16 @@
 @property (nonnull,nonatomic) NSMutableArray *comicsCharacters;
 @property (nonatomic,nonnull) NSCache *imageCache;
 
+// support order by letters
+-(void) loadCharachters:(void (^ _Nullable) (void)) completionHandler withOffset:(NSInteger)offset forLetterIndex:(NSInteger)index;
+-(void) loadImage:(NSInteger)itemIndex withCompletionHandler:(void (^ _Nullable) (UIImage* _Nullable)) completionHandler forLetterIndex:(NSInteger)index;
 
-
+// support comic details
 -(void) loadComics:(NSInteger)characterId withCompletionHandler:(void (^ _Nullable) (void)) completionHandler withOffset:(NSInteger)offset forLetterIndex:(NSInteger)index;
 -(void) loadComicImage:(NSInteger)itemIndex withCompletionHandler:(void (^ _Nullable) (UIImage* _Nullable)) completionHandler;
 
-//test
--(void) loadCharachters:(void (^ _Nullable) (void)) completionHandler withOffset:(NSInteger)offset forLetterIndex:(NSInteger)index;
--(void) loadImage:(NSInteger)itemIndex withCompletionHandler:(void (^ _Nullable) (UIImage* _Nullable)) completionHandler forLetterIndex:(NSInteger)index;
+// related characters support
 -(void) loadImage:(NSInteger)itemIndex withCompletionHandler:(void (^ _Nullable) (UIImage* _Nullable)) completionHandler forComicIndex:(NSInteger)index;
--(void) loadCharachters:(void (^ _Nullable) (void)) completionHandler forComic:(NSString *)comicId  andIndex:(NSInteger)index;
+-(void) loadCharachters:(void (^ _Nullable) (void)) completionHandler forComic:(NSString * _Nullable)comicId  andIndex:(NSInteger)index;
 
 @end

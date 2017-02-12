@@ -197,6 +197,7 @@
                                         </label>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CHm-L1-U41">
                                             <rect key="frame" x="13" y="483" width="274" height="70"/>
+                                            <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="70" id="hvW-hP-Avg"/>
                                             </constraints>
@@ -279,7 +280,7 @@
         <!--Image View Controller-->
         <scene sceneID="IVT-Iq-k8u">
             <objects>
-                <viewController storyboardIdentifier="imageViewController" modalPresentationStyle="overCurrentContext" id="5XG-jf-ti0" customClass="ImageViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="imageViewController" modalTransitionStyle="flipHorizontal" modalPresentationStyle="overCurrentContext" id="5XG-jf-ti0" customClass="ImageViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CkB-eV-fJ6"/>
                         <viewControllerLayoutGuide type="bottom" id="iQj-y3-VuS"/>
@@ -288,7 +289,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ivp-QO-lsm">
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ivp-QO-lsm">
                                 <rect key="frame" x="16" y="20" width="343" height="647"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                             </imageView>

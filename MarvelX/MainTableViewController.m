@@ -33,25 +33,13 @@
 }
 
 -(void) startLoading {
-    
-    
-    
-    stillLoadingArray = [[NSMutableArray alloc]init];
+     stillLoadingArray = [[NSMutableArray alloc]init];
     for (NSUInteger i=0; i<marvel.lettersArray.count; i++) {
         [stillLoadingArray addObject:[NSNumber numberWithBool:NO]];
-      //  [self loadNextGroup:i];
     }
-    
-    
-    
-    
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 // MARK:--------------------------- Table view data source
 
@@ -72,7 +60,6 @@
         [marvel loadCharachters:^ {
             stillLoadingArray[index] = [NSNumber numberWithBool:NO];
            // self.currentOffset += 20;
-           // NSInteger currentPath = index;
             dispatch_async(dispatch_get_main_queue(), ^{
                 MainTableViewCell *cell = [self.tableView cellForRowAtIndexPath: [NSIndexPath indexPathForRow:index inSection:0]];
                 [cell.collectionView reloadData];
@@ -88,10 +75,7 @@
     MainTableViewCell *mycell = (MainTableViewCell *) cell;
     mycell.collectionView.delegate = self;
     mycell.collectionView.dataSource = self;
-    //NSLog(@"before cell collectionview tag = %li", mycell.collectionView.tag);
     mycell.collectionView.tag = indexPath.row;
-    //NSLog(@"will display cell called for index: %li",indexPath.row);
-    //[self loadNextGroup:indexPath.row];
     [mycell.collectionView reloadData];
     
 }
@@ -110,8 +94,6 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    NSLog(@"prepare for segue called..");
-//    NSIndexPath *selectedPath = [self.collectionView indexPathsForSelectedItems][0];
     DetailCollectionViewController *detailView = segue.destinationViewController;
     detailView.marvel = self.marvel;
     detailView.itemIndex = collectionViewItemIndex;
@@ -131,8 +113,6 @@
     cell.backgroundColor = [UIColor blackColor];
     MarvelCharacter *aCharacter = marvel.letterCharactersArray[collectionView.tag][indexPath.row];
     cell.name.text =aCharacter.name;
-    //NSLog(@"IndexPath.row = %li",(long)indexPath.row);
-    // Load character image
     cell.imageView.image = nil;
     cell.imageURL = aCharacter.imageURLString;
     [cell.activityIndicator startAnimating];
@@ -148,8 +128,6 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    // [self performSegueWithIdentifier:@"showDetail" sender:self];
-    NSLog(@"collection view cell selected .. : %li",indexPath.row);
     
     collectionViewItemIndex = indexPath;
     collectionViewTag = collectionView.tag;
@@ -157,7 +135,7 @@
 }
 
 -(NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-   // NSLog(@"array:%li",marvel.charactersArray.count);
+    
     NSMutableArray *arr = marvel.letterCharactersArray[collectionView.tag];
     return arr.count;
     
@@ -170,7 +148,6 @@
 -(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger diff = ((NSMutableArray *)marvel.letterCharactersArray[collectionView.tag]).count -(indexPath.row+1);
     if (diff < 1) {
-   //     [self loadNextGroup:collectionView.tag];
         NSLog(@"\nloading next group after offset:%lu, tag:%li ",currentOffset, collectionView.tag);
     }
     
