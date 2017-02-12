@@ -44,7 +44,7 @@
 -(void)downloadJson:(NSString * _Nullable)targetUrlString withCompletionHandler:(void (^ _Nullable) (NSDictionary* _Nullable)) completionHandler
 {
     NSString *preparedURLString = [self prepareFullURLString:targetUrlString];
-    NSLog(@"Full URL:\n%@",preparedURLString);
+    //NSLog(@"Full URL:\n%@",preparedURLString);
     NSURL *url = [NSURL URLWithString:preparedURLString];
     
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];

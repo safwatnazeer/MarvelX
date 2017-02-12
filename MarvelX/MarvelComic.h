@@ -14,6 +14,7 @@
 @property (nonatomic,nonnull) NSString * description;
 @property (nonatomic,nullable) UIImage * image;
 @property (nonatomic,nonnull) NSString * imageURLString;
+@property (nonatomic,nullable) NSString * comicId;
 
--(_Nullable id) init:(NSString * _Nonnull)comicTitle  andDescription:(NSString * _Nonnull)comicDescription andURL:(NSString * _Nonnull)imageURL;
+-(_Nullable id) init:(NSString * _Nonnull)comicTitle  andDescription:(NSString * _Nonnull)comicDescription andURL:(NSString * _Nonnull)imageURL andId:(NSString * _Nonnull)comicId;
 @end

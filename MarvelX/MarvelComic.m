@@ -10,12 +10,13 @@
 
 @implementation MarvelComic
 @synthesize image,imageURLString,title,description;
--(id) init:(NSString *)comicTitle  andDescription:(NSString *)comicDescription andURL:(NSString *)imageURL {
+-(id) init:(NSString *)comicTitle  andDescription:(NSString *)comicDescription andURL:(NSString *)imageURL  andId:(NSString *)comicId{
     
     if (self = [super init]) {
         self.title = comicTitle;
         self.description = comicDescription;
         self.imageURLString = imageURL;
+        self.comicId = comicId;
         
     }
     return self;

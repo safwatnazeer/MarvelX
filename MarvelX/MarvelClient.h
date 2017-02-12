@@ -21,6 +21,7 @@
 @property (nonnull,nonatomic) NSMutableArray *comicsArray;
 @property (nonnull,nonatomic) NSMutableArray *letterCharactersArray;
 @property (nonnull,nonatomic) NSMutableArray *lettersArray;
+@property (nonnull,nonatomic) NSMutableArray *comicsCharacters;
 @property (nonatomic,nonnull) NSCache *imageCache;
 
 
@@ -31,4 +32,7 @@
 //test
 -(void) loadCharachters:(void (^ _Nullable) (void)) completionHandler withOffset:(NSInteger)offset forLetterIndex:(NSInteger)index;
 -(void) loadImage:(NSInteger)itemIndex withCompletionHandler:(void (^ _Nullable) (UIImage* _Nullable)) completionHandler forLetterIndex:(NSInteger)index;
+-(void) loadImage:(NSInteger)itemIndex withCompletionHandler:(void (^ _Nullable) (UIImage* _Nullable)) completionHandler forComicIndex:(NSInteger)index;
+-(void) loadCharachters:(void (^ _Nullable) (void)) completionHandler forComic:(NSString *)comicId  andIndex:(NSInteger)index;
+
 @end

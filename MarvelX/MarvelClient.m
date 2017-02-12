@@ -19,11 +19,20 @@
         self.lettersArray = [[NSMutableArray alloc]init];
         self.letterCharactersArray = [[NSMutableArray alloc]init];
         self.comicsArray = [[NSMutableArray alloc]init];
+        self.comicsCharacters = [[NSMutableArray alloc]init];
+        
         for (NSInteger i=0;i<26;i++ ) {
             NSMutableArray *arr1= [[NSMutableArray alloc]init];
             [self.letterCharactersArray addObject:arr1];
             [self.lettersArray addObject:[NSString stringWithFormat:@"%c", i+65]]; // conver ascii code  to a string
          }
+        
+        for (NSInteger i=0;i<100;i++ ) {
+            NSMutableArray *arr1= [[NSMutableArray alloc]init];
+            [self.comicsCharacters addObject:arr1];
+            
+        }
+
 
         self.imageCache = [[NSCache alloc]init];
     }
@@ -34,11 +43,9 @@
 -(void) loadCharachters:(void (^) (void)) completionHandler withOffset:(NSInteger)offset forLetterIndex:(NSInteger)index{
     
     //https://gateway.marvel.com:443/v1/public/characters?name=iron%20man&
-    NSString * targetURLString = [[NSString alloc]initWithFormat:@"https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=%@&offset=%lu&limit=20&modifiedSince=1950-01-01&orderBy=name&",self.lettersArray[index],offset ];
+    NSString * targetURLString = [[NSString alloc]initWithFormat:@"https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=%@&offset=%lu&limit=50&modifiedSince=1900-01-01&orderBy=name&",self.lettersArray[index],offset ];
     [self.apiClient downloadJson:targetURLString withCompletionHandler:^(NSDictionary * _Nullable dict) {
         
-       
-        // load image
         NSArray *results = [dict valueForKeyPath:@"data.results"];
         for (NSDictionary *aResult in results) {
             
@@ -61,9 +68,69 @@
  
 }
 
+-(void) loadCharachters:(void (^) (void)) completionHandler forComic:(NSString *)comicId  andIndex:(NSInteger)index{
+    
+    // clear old comics characters array
+    NSMutableArray *arr = self.comicsCharacters[index];
+    [arr removeAllObjects];
+    // load new one
+    NSString * targetURLString = [[NSString alloc]initWithFormat:@"https://gateway.marvel.com:443/v1/public/comics/%@/characters?limit=10&&orderBy=name&",comicId ];
+    [self.apiClient downloadJson:targetURLString withCompletionHandler:^(NSDictionary * _Nullable dict) {
+        NSArray *results = [dict valueForKeyPath:@"data.results"];
+            for (NSDictionary *aResult in results) {
+                NSString *path =[aResult valueForKeyPath:@"thumbnail.path"];
+                NSString *name =[aResult valueForKeyPath:@"name"];
+                NSString *characterId =[aResult valueForKeyPath:@"id"];
+                NSArray *comics = [aResult valueForKeyPath:@"comics.items"];
+                
+                
+                NSString *imageURLString =[[NSString alloc] initWithFormat:@"%@/portrait_uncanny.jpg",path];
+                MarvelCharacter *marvelCharacter = [[MarvelCharacter alloc] init:name andURL:imageURLString andId:characterId];
+                
+                // check if image available then add it to charahters else ignor it
+                if ( ![path containsString:@"image_not_available"] && comics.count > 0  ) {
+                    [self.comicsCharacters[index] addObject:marvelCharacter];
+                }
+            }
+        
+        completionHandler();
+    }];
+    
+     
+    
+}
+
+
+
 -(void) loadImage:(NSInteger)itemIndex withCompletionHandler:(void (^ _Nullable) (UIImage* _Nullable)) completionHandler forLetterIndex:(NSInteger)index{
     
     NSMutableArray *arr = self.letterCharactersArray[index];
+    MarvelCharacter *aCharacter = arr[itemIndex];
+    
+    // check if image exists in cache
+    UIImage *imageFromCache = [imageCache objectForKey:aCharacter.imageURLString];
+    if (imageFromCache) {
+        //NSLog(@"Loaded from cache: >>> %@ for row:%lu ", aCharacter.name ,itemIndex);
+        completionHandler(imageFromCache);
+    } else
+        // load image
+    {
+        [self.apiClient downloadImage:aCharacter.imageURLString withCompletionHandler:^(UIImage * _Nullable image) {
+            [self.imageCache setObject:image forKey:aCharacter.imageURLString];
+            //  NSLog(@"Loaded from Internet VVVV: %@ for row:%lu ", aCharacter.name ,itemIndex);
+            completionHandler(image);
+            
+        }];
+    }
+    
+    
+}
+
+-(void) loadImage:(NSInteger)itemIndex withCompletionHandler:(void (^ _Nullable) (UIImage* _Nullable)) completionHandler forComicIndex:(NSInteger)index{
+    
+    
+    NSMutableArray *arr = self.comicsCharacters[index];
+    NSLog(@"Loading image for comics called for comic index %li and inside character index %li, While count ofr comicsChar at index %li",index,itemIndex,arr.count );
     MarvelCharacter *aCharacter = arr[itemIndex];
     
     // check if image exists in cache
@@ -95,14 +162,16 @@
     
     [self.apiClient downloadJson:targetURLString withCompletionHandler:^(NSDictionary * _Nullable dict){
         
-        NSLog(@"\napi returned..");
+        //NSLog(@"\napi returned..");
         NSArray *results = [dict valueForKeyPath:@"data.results"];
         for (NSDictionary *aResult in results) {
             NSString *path =[aResult valueForKeyPath:@"thumbnail.path"];
             NSString *title =[aResult valueForKeyPath:@"title"];
             NSString *description =[aResult valueForKeyPath:@"description"];
             NSString *imageURLString =[[NSString alloc] initWithFormat:@"%@/portrait_uncanny.jpg",path];
-            MarvelComic *marvelComic = [[MarvelComic alloc] init:title andDescription:description andURL:imageURLString];
+            NSString *comicId = [aResult valueForKeyPath:@"id"];
+            
+            MarvelComic *marvelComic = [[MarvelComic alloc] init:title andDescription:description andURL:imageURLString andId:comicId];
             [self.comicsArray addObject:marvelComic];
             
         }

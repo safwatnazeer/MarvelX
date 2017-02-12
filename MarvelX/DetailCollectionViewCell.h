@@ -12,6 +12,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *title;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *description;
+@property (weak, nonatomic,nullable) IBOutlet UICollectionView *relatedCollectionView;
+
 
 @property (nonatomic) NSString *imageURL;
 @end

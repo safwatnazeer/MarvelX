@@ -14,6 +14,6 @@
 @property (nonatomic,nonnull) NSIndexPath *itemIndex;
 @property (nonatomic) NSInteger letterIndex;
 @property (nonatomic,nullable) UIActivityIndicatorView *activityIndicator;
-
+@property (nonatomic,nonnull) NSMutableArray *stillLoadingArray;
 
 @end

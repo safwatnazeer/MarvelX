@@ -8,13 +8,14 @@
 
 #import "DetailCollectionViewController.h"
 #import "DetailCollectionViewCell.h"
+#import "RelatedCollectionViewCell.h"
 
 @interface DetailCollectionViewController ()
 
 @end
 
 @implementation DetailCollectionViewController
-@synthesize marvel,itemIndex,activityIndicator,letterIndex;
+@synthesize marvel,itemIndex,activityIndicator,letterIndex,stillLoadingArray;
 static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
@@ -22,6 +23,12 @@ static NSString * const reuseIdentifier = @"Cell";
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
+    
+    stillLoadingArray = [[NSMutableArray alloc]init];
+    for (NSUInteger i=0; i<200; i++) {
+        [stillLoadingArray addObject:[NSNumber numberWithBool:NO]];
+        //  [self loadNextGroup:i];
+    }
     
     // Register cell classes
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
@@ -49,18 +56,9 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 #pragma mark <UICollectionViewDataSource>
 
@@ -71,44 +69,125 @@ static NSString * const reuseIdentifier = @"Cell";
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-
-    return marvel.comicsArray.count;
+    if (collectionView.tag == 100) {
+        return marvel.comicsArray.count;
+    }
+    else {
+        return ((NSMutableArray *)marvel.comicsCharacters[collectionView.tag]).count;
+    }
+    
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    DetailCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     
-    MarvelComic *comic = marvel.comicsArray[indexPath.row];
-   // NSLog(@"title:%@,desc:%@,imageURL:%@", comic.title,comic.description,comic.imageURLString);
-    if ([comic.title isEqual: [NSNull null]] ) cell.title.text =@"No Title .." ;
-        else cell.title.text = comic.title;
-    if ([comic.description isEqual: [NSNull null]])
-        cell.description.text =@"No Details ..";
-       else cell.description.text = comic.description;
-    
-    //loadImage
-    cell.imageView.image = nil;
-    
-    if (![comic.imageURLString isEqual:[NSNull null]])
+    UICollectionViewCell *cell;
+    //Detail cell
+    NSLog(@"detail cell tag = %li",collectionView.tag);
+    if (collectionView.tag == 100)
     {
-    cell.imageURL = comic.imageURLString;
-    [marvel loadComicImage:indexPath.row withCompletionHandler:^(UIImage * _Nullable image) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"Image loaded ..");
-            if ([cell.imageURL isEqualToString:comic.imageURLString]) {
-                cell.imageView.image = image;
-            }
-        });
-    }];
-    }
+        DetailCollectionViewCell *detailCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+        MarvelComic *comic = marvel.comicsArray[indexPath.row];
+       // NSLog(@"title:%@,desc:%@,imageURL:%@", comic.title,comic.description,comic.imageURLString);
+        if ([comic.title isEqual: [NSNull null]] ) detailCell.title.text =@"No Title .." ;
+            else detailCell.title.text = comic.title;
+        if ([comic.description isEqual: [NSNull null]])
+            detailCell.description.text =@"No Details ..";
+           else detailCell.description.text = comic.description;
+         
+             //loadImage
+             detailCell.imageView.image = nil;
+             if (![comic.imageURLString isEqual:[NSNull null]])
+             {
+                 detailCell.imageURL = comic.imageURLString;
+                 [marvel loadComicImage:indexPath.row withCompletionHandler:^(UIImage * _Nullable image) {
+                     dispatch_async(dispatch_get_main_queue(), ^{
+                         NSLog(@"Image loaded ..");
+                         if ([detailCell.imageURL isEqualToString:comic.imageURLString]) {
+                             detailCell.imageView.image = image;
+                         }
+                     });
+                 }];
+             }
+            
+        // load related characters
+        if (stillLoadingArray[indexPath.row] == [NSNumber numberWithBool:NO]) {
+            stillLoadingArray[indexPath.row] = [NSNumber numberWithBool:YES];
+            NSLog(@"Loading for comic collection cell:%li",indexPath.row);
+            [marvel loadCharachters:^ {
+                stillLoadingArray[indexPath.row] = [NSNumber numberWithBool:NO];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSLog(@"count of comic related characters = %li",((NSMutableArray *)marvel.comicsCharacters[indexPath.row]).count );
+                 [detailCell.relatedCollectionView reloadData ];
+                });
+            } forComic:comic.comicId andIndex:indexPath.row];
+        }
+            
+            
+            
+            cell = detailCell;
+            
+     }
+     else
+         // related collection view cell
+     {
+         RelatedCollectionViewCell *relatedCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"relatedCell" forIndexPath:indexPath];
+         relatedCell.imageView.image = nil;
+         //cell.backgroundColor = [UIColor blackColor];
+         NSMutableArray *arr = marvel.comicsCharacters[collectionView.tag];
+         // check if related comic characters already loaded , then load the images
+         if (arr.count >0 ) {
+             MarvelCharacter *aCharacter = marvel.comicsCharacters[collectionView.tag][indexPath.row];
+             //cell.name.text =aCharacter.name;
+             //NSLog(@"IndexPath.row = %li",(long)indexPath.row);
+             // Load character image
+             relatedCell.imageView.image = nil;
+             relatedCell.imageURL = aCharacter.imageURLString;
+             [relatedCell.activityIndicator startAnimating];
+             [marvel loadImage:indexPath.row withCompletionHandler:^(UIImage * _Nullable image) {
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     if ([relatedCell.imageURL isEqualToString:aCharacter.imageURLString]) {
+                         [relatedCell.activityIndicator stopAnimating];
+                         relatedCell.imageView.image = image;
+                     }
+                 });
+             } forComicIndex:collectionView.tag];
+         }
+         cell = relatedCell;
+     }
     
     
     return cell;
 }
 
+-(void) collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    // handle only main cells not the realted ones
+    if (collectionView.tag == 100) {
+        // Configure the cell...
+        DetailCollectionViewCell *mycell = (DetailCollectionViewCell *) cell;
+        mycell.relatedCollectionView.delegate = self;
+        mycell.relatedCollectionView.dataSource = self;
+        //NSLog(@"before cell collectionview tag = %li", mycell.collectionView.tag);
+        mycell.relatedCollectionView.tag = indexPath.row;
+        //NSLog(@"will display cell called for index: %li",indexPath.row);
+        //[self loadNextGroup:indexPath.row];
+        //[mycell.relatedCollectionView reloadData];
+    }
+}
+
+
+
+
+
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(self.view.frame.size.width-40, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height);
+    if (collectionView.tag == 100) {
+    return CGSizeMake(self.view.frame.size.width-40, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height-40);
+    }
+    else {
+        return CGSizeMake(55, 70);
+    }
 }
 
 -(UIStatusBarStyle) preferredStatusBarStyle {
