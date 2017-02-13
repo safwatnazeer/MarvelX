@@ -24,6 +24,7 @@ static NSString * const reuseIdentifier = @"Cell";
     // gesture
     self.gestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(gestureAction:)];
     self.gestureRecognizer.delegate = self;
+    self.gestureRecognizer.delaysTouchesBegan = YES;
     [self.collectionView addGestureRecognizer:self.gestureRecognizer];
     
     stillLoadingArray = [[NSMutableArray alloc]init];
@@ -60,27 +61,43 @@ static NSString * const reuseIdentifier = @"Cell";
     
     CGPoint p = [gesture locationInView:self.collectionView];
     
-    NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:p];
-    if (indexPath == nil){
-    } else {
-        // get the cell at indexPath (the one you long pressed)
-        DetailCollectionViewCell* cell =(DetailCollectionViewCell *) [self.collectionView cellForItemAtIndexPath:indexPath];
-        CGRect frame = cell.imageView.frame;
-        CGRect compareFrame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width+indexPath.row*cell.frame.size.width, frame.size.height);
-        
-        if (CGRectContainsPoint(compareFrame, p)) {
-            [self showEnlargedImage:cell.imageView.image withFrame:cell.frame];
+    if ([self isComicImageTapped:p])
+    {
+        NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:p];
+        if (indexPath != nil){
+            DetailCollectionViewCell* cell =(DetailCollectionViewCell *) [self.collectionView cellForItemAtIndexPath:indexPath];
+            [self showEnlargedImage:cell.imageView.image];
         }
     }
     
+    
+}
+-(BOOL) isComicImageTapped:(CGPoint)tapPoint {
+    
+    NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:tapPoint];
+    if (indexPath != nil){
+    
+        // get the cell at indexPath (the one you long pressed)
+        DetailCollectionViewCell* cell =(DetailCollectionViewCell *) [self.collectionView cellForItemAtIndexPath:indexPath];
+        CGRect frame = cell.imageView.frame;
+        CGFloat offset = 10+indexPath.row*(cell.frame.size.width+10);
+        CGRect compareFrame = CGRectMake(frame.origin.x + offset, frame.origin.y, frame.size.width ,frame.size.height);
+        
+        if (CGRectContainsPoint(compareFrame, tapPoint))
+            return YES;
+        else return NO;
+    }
+
+    return NO;
 }
 
--(void) showEnlargedImage:(UIImage *)image withFrame:(CGRect)frame{
+
+-(void) showEnlargedImage:(UIImage *)image{
     if (self.myPopoverController == nil)
     {
         ImageViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"imageViewController"];
         viewController.image = image;
-        [viewController.view setFrame:frame];
+       // [viewController.view setFrame:frame];
        [self presentViewController:viewController animated:YES completion:nil];
     }
     
@@ -217,7 +234,34 @@ static NSString * const reuseIdentifier = @"Cell";
     return UIStatusBarStyleLightContent;
 }
 
+-(void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (collectionView.tag != 100) {
+        NSLog(@" related view item selected: %li",indexPath.row);
+        RelatedCollectionViewCell *cell = (RelatedCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
+        
+        [self showEnlargedImage:cell.imageView.image ];
+        
+    } else {
+        NSLog(@" main view item selected: %li",indexPath.row);
 
+    }
+}
+//-(BOOL) gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer {
+//    // only handle tapping empty space (i.e. not a cell)
+//    let point = gestureRecognizer.locationInView(collectionView)
+//    let indexPath = collectionView.indexPathForItemAtPoint(point)
+//    return indexPath == nil
+//}
 
+-(BOOL) gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    
+    CGPoint tapPoint = [gestureRecognizer locationInView:self.collectionView];
+    if ([self isComicImageTapped:tapPoint])
+        return YES;
+    else return NO;
+    
+}
+                                     
 
 @end
